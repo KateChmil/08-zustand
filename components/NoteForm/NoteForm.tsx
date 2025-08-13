@@ -6,7 +6,7 @@ import type { NoteTag } from "../../types/note";
 
 import type { Note } from "../../types/note";
 import { useRouter } from 'next/navigation';
-import { useNoteDraftStore } from '@/lib/stores/noteStore';
+import { useNoteDraftStore } from '@/lib/store/noteStore';
 
 
 
