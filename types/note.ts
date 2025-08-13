@@ -10,3 +10,9 @@ tag: NoteTag;
 }
 
 export type NoteTag = 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+
+export interface NewNoteData {
+  title: string,
+  content: string,
+  tag: string,
+};

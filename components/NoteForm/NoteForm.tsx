@@ -5,8 +5,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { NoteTag } from "../../types/note";
 
 import type { Note } from "../../types/note";
-import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import { useNoteDraftStore } from '@/lib/stores/noteStore';
 
 
 
@@ -21,23 +21,41 @@ interface NoteFormValues {
 export default function NoteForm() {
   const queryClient = useQueryClient();
   const router = useRouter();
+
+
+const { draft, setDraft, clearDraft } = useNoteDraftStore();
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    setDraft({
+      ...draft,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+
+
+
+
+
+
+
+
+
   const handleCancel = () => router.push('/notes/filter/all');
-
-
 
   const mutation = useMutation<Note, Error, NoteFormValues>({
     mutationFn: createNote,
     onSuccess: () => {
+      clearDraft()
       router.push('/notes/filter/all');
       queryClient.invalidateQueries({ queryKey: ['notes'] });
       ;
     }
   });
-  
- 
- 
-
-
+   
   const handleSubmit = (formData: FormData) => {
      const values: NoteFormValues = {
     title: formData.get("title") as string,
@@ -58,7 +76,7 @@ export default function NoteForm() {
             type="text"
             name="title"
             className={css.input}
-         
+         defaultValue={draft?.title} onChange={handleChange}
           />
         
         </div>
@@ -70,6 +88,7 @@ export default function NoteForm() {
             name="content"
             rows={6}
             className={css.textarea}
+            defaultValue={draft?.content} onChange={handleChange}
         
           />
         
@@ -81,7 +100,7 @@ export default function NoteForm() {
             id="tag"
             name="tag"
             className={css.select}
-        
+        defaultValue={draft?.tag} onChange={handleChange}
           >
             <option value="Todo">Todo</option>
             <option value="Work">Work</option>
