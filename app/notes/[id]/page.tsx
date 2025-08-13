@@ -8,6 +8,32 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+
+
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params
+  const note = await fetchNoteById(id)
+  return {
+    title: `Note: ${note.title}`,
+    description: note.content.slice(0, 30),
+    openGraph: {
+      title: `Note: ${note.title}`,
+      description: note.content.slice(0, 100),
+      url: `https://07-routing-nextjs-cyan-eight.vercel.app/notes/filter/All`,
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: note.title,
+        },
+      ],
+      type: 'article',
+    },
+  }
+}
+
 const NoteDetails = async ({ params }: Props) => {
   const { id } = await params;
   const queryClient = new QueryClient();

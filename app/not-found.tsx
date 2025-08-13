@@ -1,4 +1,29 @@
 import css from "./page.module.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Notehub",
+  description: "This note was not found",
+  openGraph: {
+      title: "NoteHub",
+      description: "This note was not found",
+      url: "https://07-routing-nextjs-cyan-eight.vercel.app/" ,
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: "notehub",
+        },
+      ],
+      type: 'article',
+    },
+};
+
+
+
+
 
 
 const NotFound = () => {

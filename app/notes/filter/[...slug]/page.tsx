@@ -2,6 +2,31 @@ import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
 
 
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  return {
+    title: `Notes: ${slug}`,
+    description: `All ${slug} notes`,
+    openGraph: {
+      title: `Note: ${slug}`,
+      description: `All ${slug} notes`,
+      url: "https://07-routing-nextjs-cyan-eight.vercel.app/notes/filter/All",
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: "notehub",
+        },
+      ],
+      type: 'article',
+    },
+  }
+}
+
+
 type Props = {
   params: Promise<{ slug: string[] }>;
 };

@@ -6,6 +6,8 @@ const NotesSidebar = () => {
   
 
   return (
+    <>
+       <Link  className={css.menuCreate} href="/notes/action/create" >Create note</Link>
     <ul className={css.menuList}>
        {tags.map((tag) => (
               <li className={css.menuItem} key={tag} >
@@ -14,7 +16,8 @@ const NotesSidebar = () => {
               </Link>
               </li>
          ))}
-    </ul>
+      </ul>
+      </>
   );
 };
 
