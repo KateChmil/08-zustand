@@ -1,17 +1,18 @@
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
+import { Metadata } from "next";
 
 
-
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const tag = slug[0] === 'all' ? undefined : slug[0];
   return {
-    title: `Notes: ${slug}`,
-    description: `All ${slug} notes`,
+    title: `Notes: ${tag}`,
+    description: `All ${tag} notes`,
     openGraph: {
-      title: `Note: ${slug}`,
-      description: `All ${slug} notes`,
-      url: "https://07-routing-nextjs-cyan-eight.vercel.app/notes/filter/All",
+      title: `Note: ${tag}`,
+      description: `All ${tag} notes`,
+      url: `https://08-zustand-pied.vercel.app/notes/filter/${tag}`,
       siteName: 'NoteHub',
       images: [
         {

@@ -76,7 +76,7 @@ const { draft, setDraft, clearDraft } = useNoteDraftStore();
             type="text"
             name="title"
             className={css.input}
-            defaultValue={draft?.title} onChange={handleChange}
+             value={draft.title || ""} onChange={handleChange}
             required
           minLength={3}
           maxLength={50}
@@ -91,7 +91,7 @@ const { draft, setDraft, clearDraft } = useNoteDraftStore();
             name="content"
             rows={6}
             className={css.textarea}
-            defaultValue={draft?.content} onChange={handleChange}
+           value={draft.content || ""}  onChange={handleChange}
              maxLength={500}
         
           />
@@ -104,7 +104,7 @@ const { draft, setDraft, clearDraft } = useNoteDraftStore();
             id="tag"
             name="tag"
             className={css.select}
-            defaultValue={draft?.tag} onChange={handleChange}
+           value={draft.tag || "Todo"}  onChange={handleChange}
             required
           >
             <option value="Todo">Todo</option>
